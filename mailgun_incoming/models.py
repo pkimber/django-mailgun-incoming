@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-from email.Utils import parseaddr
+from email.utils import parseaddr
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.utils import simplejson
