@@ -67,6 +67,10 @@ class Incoming(View):
         email_received.send(sender=self.email_model, instance=email, attachments=attachments or [])
     
     def verify_signature(self, token, timestamp, signature):
-        return signature == hmac.new(key=self.api_key,
-                                 msg='{0}{1}'.format(timestamp, token),
-                                 digestmod=hashlib.sha256).hexdigest()
+        api_key = str.encode(self.api_key)
+        msg = str.encode('{0}{1}'.format(timestamp, token))
+        return signature == hmac.new(
+            key=api_key,
+            msg=msg,
+            digestmod=hashlib.sha256
+        ).hexdigest()
